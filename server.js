@@ -3,13 +3,13 @@ const cors = require('cors')
 const pool = require('./config/db')
 
 const app = express();
+
+//MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 
-// Register the tweet routes
-// app.use('/tweets', tweetsRoutes);
-//create tweet
-// app.use("/api/home", tweetsRoutes)
+//ROUTES
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
