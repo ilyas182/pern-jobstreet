@@ -10,13 +10,13 @@ applications int,
 
 CREATE TABLE jobApplications (
 id serial PRIMARY KEY,
-job_id integer NOT NULL REFERENCES jobs (id)
+job_id integer NOT NULL REFERENCES jobs (id),
 user_id integer NOT NULL REFERENCES users (id)
  );
 
 CREATE TABLE savedJobs (
 id serial PRIMARY KEY,
-job_id integer NOT NULL REFERENCES jobs (id)
+job_id integer NOT NULL REFERENCES jobs (id),
 user_id integer NOT NULL REFERENCES users (id)
  );
 
@@ -29,7 +29,18 @@ password varchar NOT NULL,
 businessName varchar NOT NULL,
 bio text,
 NoOfJobs int,
+client_reviews text,
+employee_reviews int
  );
+
+CREATE TABLE companyReview (
+id serial PRIMARY KEY,
+review text NOT NULL,
+rating int NOT NULL,
+user_id integer NOT NULL REFERENCES users (id),
+employer_id integer NOT NULL REFERENCES employers (id)
+ );
+ 
 
 CREATE TABLE jobs (
 id serial PRIMARY KEY,
