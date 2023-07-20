@@ -1,5 +1,6 @@
 const pool = require('../config/db')
 const bcrypt = require('bcrypt');
+const jwtGenerator = require('../utils/jwtGenerator');
 
 async function create(req,res) {
     try {
@@ -19,8 +20,11 @@ async function create(req,res) {
 
         // Step 4: enter the new user inside our database
         const newUser = await pool.query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *", [name, email, bcryptPassword])
-        res.json(newUser.rows[0]);
+        console.log(newUser.rows[0]);
         // Step 5: generate jwt
+        const token = jwtGenerator(newUser.rows[0].id);
+        res.json({token});
+        
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error")
