@@ -26,7 +26,7 @@ export default function Register({setAuth}) {
 
             const parseResponse = await response.json();
             localStorage.setItem("token", parseResponse.token);
-            
+            setAuth(true);
         } catch (error) {
             console.error(error.message)
         }

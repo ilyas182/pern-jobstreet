@@ -11,7 +11,7 @@ function App() {
 
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
-
+  
 
   const setAuth = boolean => {
     setIsAuth(boolean)
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/" element={<MainPage />}/>
           <Route exact path="/register" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Register setAuth={setAuth}/>)}/>
           <Route exact path="/login" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Login setAuth={setAuth}/>)}/>
-          <Route exact path="/dashboard" element={<Dashboard setAuth={setAuth}/>}/> 
+          <Route exact path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/> 
         </Routes>
       
     </Fragment>
