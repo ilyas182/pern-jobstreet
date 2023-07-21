@@ -3,7 +3,7 @@ import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
-import MainPage from './pages/MainPage/MainPage';
+import MainPage from './pages/MainPage/MainPage/MainPage';
 import { Fragment, useEffect, useState } from 'react';
 
 
