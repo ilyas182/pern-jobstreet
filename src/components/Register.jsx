@@ -12,10 +12,29 @@ export default function Register() {
         setInputs({...inputs, [e.target.name]:e.target.value})
     };
 
+    const submitForm = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            const body = {email, password, name};
+            const response = await fetch("http://localhost:3001/api/main/register", { 
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        })
+
+            const parseResponse = await response.json();
+            console.log("parseresponse", parseResponse);
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
     return (
         <Fragment>
             <h1 className="text-center">Register</h1>
-            <form>
+            <form onSubmit={submitForm}>
                 <input 
                     type='email' 
                     name='email' 
