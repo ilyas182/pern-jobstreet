@@ -31,4 +31,31 @@ async function create(req, res) {
     }
 }
 
-module.exports = { create }
+async function login(req,res){
+    try {
+        // 1. destructure the req.body
+        const {email, password} = req.body;
+        // 2. check if user doesnt exist
+        const employer = await pool.query("SELECT * FROM employers WHERE email = $1", [email]);
+
+        if (employer.rows[0].length === 0)
+        {
+            res.status(401).json("Email or password is incorrect");
+        }
+        // 3. check if incoming password is same as database pwd
+        const validPassword = await bcrypt.compare(password, employer.rows[0].password);
+        console.log(validPassword);
+        if (!validPassword) {
+            return res.status(401).json("Email or password is incorrect");
+        }
+
+        // 4. jwt token
+        const token = jwtGenerator(employer.rows[0].id);
+        res.json({token});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error")
+    }
+}
+
+module.exports = { create, login }
