@@ -58,4 +58,12 @@ async function login(req,res){
     }
 }
 
-module.exports = { create, login }
+async function verify(req, res){
+    try {
+        res.json(true);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error")
+    }
+}
+module.exports = { create, login, verify }
