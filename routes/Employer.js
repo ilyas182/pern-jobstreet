@@ -9,5 +9,6 @@ router.post('/register', validInfo, employersCtrl.create);
 router.post('/login', validInfo, employersCtrl.login);
 router.get("/verify", authorization, employersCtrl.verify);
 router.post('/postJob', employersCtrl.postJob);
+router.post('/postJob', employersCtrl.postJobQn);
 
 module.exports = router;

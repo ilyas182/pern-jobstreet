@@ -78,4 +78,17 @@ async function postJob(req,res){
         console.error(error.message);
     }
 }
-module.exports = { create, login, verify, postJob }
+
+async function postJobQn(req,res){
+    try {
+        const { question, answers, job_id, jobQn_id  } = req.body;
+        newQn = await pool.query("INSERT INTO jobQn (questions, job_id) VALUES ($1, $2) RETURNING *",
+        [question, job_id]);
+        newAns = await pool.query("INSERT INTO jobAns (answers, jobQn_id) VALUES ($1, $2) RETURNING *",
+        [answers, jobQn_id]);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+module.exports = { create, login, verify, postJob, postJobQn }
