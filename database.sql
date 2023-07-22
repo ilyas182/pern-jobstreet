@@ -54,6 +54,9 @@ closingDate date
 employer_id integer NOT NULL REFERENCES employers (id) ON DELETE CASCADE
  );
 
+ALTER TABLE jobs
+ADD level varchar;
+
 CREATE TABLE jobQn (
 id serial PRIMARY KEY,
 questions varchar NOT NULL,

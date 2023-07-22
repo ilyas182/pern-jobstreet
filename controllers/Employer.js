@@ -66,4 +66,16 @@ async function verify(req, res){
         res.status(500).send("Server Error")
     }
 }
-module.exports = { create, login, verify }
+
+async function postJob(req,res){
+    try {
+        const {title, description, pay, industry, location, closingDate, employer_id, level} = req.body;
+        const newJob = await pool.query("INSERT INTO jobs (title, description, pay, industry, location, closingDate, employer_id, level) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+        [title, description, pay, industry, location, closingDate, employer_id, level])
+        console.log(newJob.rows[0]);
+        res.json(newJob.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+module.exports = { create, login, verify, postJob }
