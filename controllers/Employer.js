@@ -79,16 +79,28 @@ async function postJob(req,res){
     }
 }
 
-async function postJobQn(req,res){
+async function postJobQn(req, res) {
     try {
-        const { question, answers, job_id, jobQn_id  } = req.body;
-        newQn = await pool.query("INSERT INTO jobQn (questions, job_id) VALUES ($1, $2) RETURNING *",
-        [question, job_id]);
-        newAns = await pool.query("INSERT INTO jobAns (answers, jobQn_id) VALUES ($1, $2) RETURNING *",
-        [answers, jobQn_id]);
+      const { question, answers, job_id, jobQn_id } = req.body;
+      const newQn = await pool.query(
+        "INSERT INTO jobQn (questions, job_id) VALUES ($1, $2) RETURNING *",
+        [question, job_id]
+      );
+        let newAns;
+    //   const questionId = newQn.rows[0].id;
+        answers.map(async (answer) => {
+            newAns = await pool.query(
+            "INSERT INTO jobAns (answers, jobQn_id) VALUES ($1, $2) RETURNING *",
+            [answer, jobQn_id]
+          );
+    });
+      
+  
+      res.json(newAns);
     } catch (error) {
-        console.error(error.message);
+      console.error(error.message);
+      res.status(500).send("Server Error");
     }
-}
+  }
 
 module.exports = { create, login, verify, postJob, postJobQn }
