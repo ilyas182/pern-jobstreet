@@ -93,10 +93,11 @@ async function postJobQn(req, res) {
             "INSERT INTO jobAns (answers, jobQn_id) VALUES ($1, $2) RETURNING *",
             [answer, jobQn_id]
           );
+          console.log(newAns.rows[0])
     });
       
   
-      res.json(newAns);
+      
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Server Error");
