@@ -67,4 +67,26 @@ async function verify(req, res){
     }
 }
 
-module.exports = { create, login, verify };
+async function apply(req, res){
+    const {job_id, user_id} = req.body;
+    try {
+        const appliedJob = await pool.query("INSERT INTO jobApplications (job_id, user_id) VALUES ($1, $2)",
+        [job_id, user_id]);
+        res.json({ message: "Job application submitted" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error")
+    }
+}
+async function save(req, res){
+    const {job_id, user_id} = req.body;
+    try {
+        const savedJob = await pool.query("INSERT INTO savedJobs (job_id, user_id) VALUES ($1, $2)",
+        [job_id, user_id]);
+        res.json({ message: "Job saved" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error")
+    }
+}
+module.exports = { create, login, verify, apply, save };
