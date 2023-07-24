@@ -37,7 +37,7 @@ export default function RegisterEmployer({setAuth, EmployerAuth}){
     }
     return (
     <>
-    
+    <h1>Employer Registration</h1>
     <form onSubmit={submitForm}>
                 <input 
                     type='email' 

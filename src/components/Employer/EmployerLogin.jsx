@@ -34,13 +34,14 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
             navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
             { state: { employer: parseResponse.employer } }
             );
+            // console.log(parseResponse.employer)
         } catch (error) {
             console.error(error.message)
         }
     }
     return (
     <>
-    
+    <h1>Employer Login</h1>
     <form onSubmit={submitForm}>
                 <input 
                     type='email' 

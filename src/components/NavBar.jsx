@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 
 export default function NavBar(){
+    const navigate = useNavigate()
     return (
         <>  
         <Navbar bg="light" data-bs-theme="light">
@@ -12,8 +13,8 @@ export default function NavBar(){
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#features">My profile</Nav.Link>
-              <Button variant="outline-success">Login</Button>
-              <Button variant="outline-success">For Employers</Button>
+              <Button variant="outline-success" onClick={() => navigate('/login')}>Login</Button>
+              <Button variant="outline-success" onClick={() => navigate('/employer/main')}>For Employers</Button>
             </Nav>
           </Container>
         </Navbar>

@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import EmployerMainPage from './pages/EmployerPages/EmployerMainPage';
 import EmployerLogin from './components/Employer/EmployerLogin';
 import EmployerDashboard from './components/Employer/EmployerDashboard';
+import EmployerJobPage from './pages/EmployerPages/EmployerJobPage';
 
 
 
@@ -23,7 +24,7 @@ function App() {
     setIsAuth(boolean)
   }
   const EmployerAuth = boolean => {
-    setIsAuth(boolean)
+    setEmployerAuth(boolean)
   }
   return (
     <Fragment>
@@ -36,6 +37,9 @@ function App() {
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
           <Route path="/employer/login" element={<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
+          <Route path="/employer/dashboard/:businessName/jobs" element={<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
+          {/* <Route path="jobs" element={<EmployerJobPage/>}/> */}
+        
         </Routes>
       
     </Fragment>

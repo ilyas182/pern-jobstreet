@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import EmployerNavbar from "./EmployerNavbar";
 
 export default function EmployerDashboard({setAuth, EmployerAuth}) {
     const location = useLocation();
@@ -12,7 +13,7 @@ export default function EmployerDashboard({setAuth, EmployerAuth}) {
     }
     return (
         <Fragment>
-            <>Welcome, {employer.businessname}</>
+            <EmployerNavbar employer={employer}/>
             <button onClick={handleLogout}>Logout</button>
         </Fragment>
     )
