@@ -126,5 +126,14 @@ async function postJobQn(req, res) {
     }
   }
 
+  async function deleteJob(req, res) {
+    try {
+        const { id } = req.params;
+        const tweet = await pool.query('DELETE FROM jobs WHERE id = $1', [id]);
+        res.json("Job deleted");
+    } catch (error) {
+        console.error(error.message);
+    }
+  }
 
-module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer }
+module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer, deleteJob }

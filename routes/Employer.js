@@ -12,5 +12,6 @@ router.post('/postJob', employersCtrl.postJob);
 router.post('/postJobQn', employersCtrl.postJobQn);
 router.get("/:employer_id/jobs", employersCtrl.jobsByEmployer)
 router.get('/getEmployer', employersCtrl.getEmployer);
+router.delete('/deleteJob/:id', employersCtrl.deleteJob)
 
 module.exports = router;
