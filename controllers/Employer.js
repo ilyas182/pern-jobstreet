@@ -136,4 +136,16 @@ async function postJobQn(req, res) {
     }
   }
 
-module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer, deleteJob }
+  async function editJob(req,res){
+    try {
+        const { id } = req.params;
+        const {title, description, pay, industry, location, closingDate, level} = req.body;
+        const editJob = await pool.query("UPDATE jobs SET title = $1, description = $2, pay = $3, industry = $4, location = $5, closingDate = $6, level = $7 WHERE id = $8",
+        [title, description, pay, industry, location, closingDate, level, id]) 
+        res.json(editJob)
+    } catch (error) {
+        console.error(error.message);
+    }
+  }
+
+module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer, deleteJob, editJob }

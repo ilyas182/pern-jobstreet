@@ -20,11 +20,13 @@ export default function EmployerJobDetails(){
       }
   
     return(
-    <>
+    <>  
+        <button onClick={() => navigate(-1)}>Back</button>
         <h1>{job?.title}</h1>
         <p>Description: {job?.description}</p>
         <p>Industry: {job?.industry}</p>
         <p>Pay: {job?.pay}</p>
+        
         <button onClick={() => handleDelete(job.id)}>Delete job</button>
 
     </>)
