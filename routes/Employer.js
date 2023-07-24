@@ -10,5 +10,6 @@ router.post('/login', validInfo, employersCtrl.login);
 router.get("/verify", authorization, employersCtrl.verify);
 router.post('/postJob', employersCtrl.postJob);
 router.post('/postJobQn', employersCtrl.postJobQn);
+router.get("/:employer_id/jobs", employersCtrl.jobsByEmployer)
 
 module.exports = router;

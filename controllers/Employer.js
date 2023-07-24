@@ -104,4 +104,15 @@ async function postJobQn(req, res) {
     }
   }
 
-module.exports = { create, login, verify, postJob, postJobQn }
+  async function jobsByEmployer(req,res){
+    const { employer_id } = req.params;
+    try {
+        const employerJobs = await pool.query("SELECT * FROM jobs WHERE employer_id = ($1)",
+        [employer_id]);
+        res.json(employerJobs.rows);
+    } catch (error) {
+        console.error(error.message)
+    }
+  }
+
+module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer }
