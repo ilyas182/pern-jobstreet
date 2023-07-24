@@ -1,13 +1,13 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
-export default function Register({setAuth}) {
+export default function EmployerLogin({setAuth, EmployerAuth}){
+
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
-        name: ""
     });
 
-    const {email, password, name} = inputs;
+    const {email, password} = inputs;
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name]:e.target.value})
     };
@@ -17,8 +17,8 @@ export default function Register({setAuth}) {
 
         try {
 
-            const body = {email, password, name};
-            const response = await fetch("http://localhost:3001/api/main/register", { 
+            const body = {email, password};
+            const response = await fetch("http://localhost:3001/api/employer/login", { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)
@@ -26,39 +26,33 @@ export default function Register({setAuth}) {
 
             const parseResponse = await response.json();
             localStorage.setItem("token", parseResponse.token);
-            setAuth(true);
+            EmployerAuth(true);
+            setAuth(false);
         } catch (error) {
             console.error(error.message)
         }
     }
-
     return (
-        <Fragment>
-            <h1 className="text-center">Register</h1>
-            <form onSubmit={submitForm}>
+    <>
+    
+    <form onSubmit={submitForm}>
                 <input 
                     type='email' 
-                    name='email' 
-                    placeholder="email" 
+                    placeholder='Email Login ID' 
+                    name="email" 
                     className="form-control my-3"
                     value = {email}
                     onChange={e => onChange(e)}/>
                 <input 
                     type='password' 
-                    name='password' 
-                    placeholder="password" 
+                    placeholder='Password' 
+                    name="password" 
                     className="form-control my-3"
                     value = {password}
                     onChange={e => onChange(e)}/>
-                <input 
-                    type='text' 
-                    name='name' 
-                    placeholder="name" 
-                    className="form-control my-3"
-                    value = {name}
-                    onChange={e => onChange(e)}/>
-                <button className="btn btn-success btn-block">Submit</button>
+                
+                <button className="btn btn-success btn-block">Login</button>
             </form>
-        </Fragment>
+    </>
     )
 }

@@ -38,16 +38,16 @@ export default function Login({setAuth}) {
         <form onSubmit={handleSubmit}>
             <input 
                 type="email" 
-                name="email"
                 placeholder="email"
+                name="email"
                 className="form-control my-3"
                 value={email}
                 onChange={(e)=>onChange(e)}
             />
             <input
                 type="password"
-                name="password"
                 placeholder="password"
+                name="password"
                 className="form-control my-3"
                 value={password}
                 onChange={(e)=>onChange(e)}
