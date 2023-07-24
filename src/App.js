@@ -8,7 +8,7 @@ import { Fragment, useEffect, useState } from 'react';
 import NavBar from './components/NavBar';
 import EmployerMainPage from './pages/EmployerPages/EmployerMainPage';
 import EmployerLogin from './components/Employer/EmployerLogin';
-import EmployerDashboard from './components/Employer/EmplyerDashboard';
+import EmployerDashboard from './components/Employer/EmployerDashboard';
 
 
 
@@ -35,7 +35,7 @@ function App() {
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/> 
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
           <Route path="/employer/login" element={<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/dashboard" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
+          <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
         </Routes>
       
     </Fragment>

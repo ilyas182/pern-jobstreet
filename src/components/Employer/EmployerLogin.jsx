@@ -31,7 +31,9 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
             localStorage.setItem("token", parseResponse.token);
             EmployerAuth(true);
             setAuth(false);
-            navigate('/employer/dashboard');
+            navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
+            { state: { employer: parseResponse.employer } }
+            );
         } catch (error) {
             console.error(error.message)
         }
