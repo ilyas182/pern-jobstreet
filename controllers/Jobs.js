@@ -23,11 +23,11 @@ async function findByIndustry(req,res){
     }
 }
 
-async function findbyId(req,res){
-    const { jobId } = req.params;
+async function findById(req,res){
+    const { id } = req.params;
     try {
         const jobById = await pool.query("SELECT * FROM jobs WHERE id = ($1)",
-        [jobId]); 
+        [id]); 
         res.json(jobById.rows);
     } catch (error) {
         console.error(error.message);
@@ -35,4 +35,4 @@ async function findbyId(req,res){
     }
 }
 
-module.exports = { getAll, findByIndustry, findbyId }
+module.exports = { getAll, findByIndustry, findById }
