@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import EmployerJobDetails from "../../components/Employer/EmployerJobDetails";
 
 export default function EmployerJobPage(){
     const location = useLocation();
@@ -22,7 +23,12 @@ export default function EmployerJobPage(){
     return(
     <>
     <button onClick={() => navigate(-1)}>Back</button>
-    <p>{employerJobs[0]?.title}</p>
+    <hr/>
+    {employerJobs && employerJobs.map((job, i) => (
+        <div>
+         {i+1}.<Link to={`/employer/dashboard/${employer.businessname}/jobs/${job.id}`} state={{job: job}}>{job.title}</Link>
+        </div>
+      ))}
     </>
     )
 }
