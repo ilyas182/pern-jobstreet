@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function EmployerLogin({setAuth, EmployerAuth}){
 
+
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
@@ -28,6 +31,7 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
             localStorage.setItem("token", parseResponse.token);
             EmployerAuth(true);
             setAuth(false);
+            navigate('/employer/dashboard');
         } catch (error) {
             console.error(error.message)
         }

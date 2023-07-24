@@ -51,7 +51,7 @@ async function login(req,res){
 
         // 4. jwt token
         const token = jwtGenerator(employer.rows[0].id);
-        res.json({token});
+        res.json({token, employer: employer.rows[0]});
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error")
@@ -115,4 +115,16 @@ async function postJobQn(req, res) {
     }
   }
 
-module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer }
+  async function getEmployer(req,res){
+    const { email } = req.params;
+    try {
+        const employer = await pool.query("SELECT * FROM employer WHERE email = ($1)",
+        [email]);
+        res.json(employer.rows);
+    } catch (error) {
+        console.error(error.message)
+    }
+  }
+
+
+module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer }
