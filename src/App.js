@@ -5,6 +5,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import MainPage from './pages/MainPage/MainPage/MainPage';
 import { Fragment, useEffect, useState } from 'react';
+import NavBar from './components/NavBar';
+
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
   }
   return (
     <Fragment>
-      
+        <NavBar/>
         <Routes>
           <Route exact path="/" element={<MainPage />}/>
           <Route exact path="/register" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Register setAuth={setAuth}/>)}/>
