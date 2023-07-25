@@ -28,15 +28,32 @@ function App() {
   const EmployerAuth = boolean => {
     setEmployerAuth(boolean)
   }
+
+  async function checkAuth() {
+    try {
+      const response = await fetch('http://localhost:3001/api/main/verify',{
+        method: "GET",
+        headers: {token: localStorage.token}
+      })
+      const parseResponse = await response.json();
+      parseResponse === true ? setIsAuth(true) : setIsAuth(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    checkAuth()
+  }, [])
   return (
     <Fragment>
         <NavBar/>
         <Routes>
           <Route path="/" element={<MainPage />}/>
-          <Route path="/register" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Register setAuth={setAuth}/>)}/>
+          <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>
           <Route path="/login" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
-          <Route path="/job/:jobId/apply" element={<JobApplicationPage/>}/> 
+          <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/> 
 
 
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
