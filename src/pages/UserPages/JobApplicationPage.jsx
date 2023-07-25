@@ -21,7 +21,7 @@ export default function JobApplicationPage() {
     useEffect(()=>{
         getId();
     }, []);
-    
+
     const [inputs, setInputs] = useState({
         experience: "",
         expectedPay: "",
@@ -90,9 +90,13 @@ export default function JobApplicationPage() {
                     className="form-control my-3"
                     value = {contact}
                     onChange={e => onChange(e)}/>
-                <button className="btn btn-success btn-block">Apply</button>
+                {updateStatus !== "success" && (<button className="btn btn-success btn-block">Apply</button>)}
+                {updateStatus == "success" && (
+                <button className="btn btn-success btn-block" disabled="true">
+                    Applied!
+                </button>)}
             </form>
-            {updateStatus === "success" && <p>Applied!</p>}
-            {updateStatus === "error" && <p>Update failed. Please try again.</p>}
+            {updateStatus === "success" && <p>Application successful</p>}
+            {updateStatus === "error" && <p>Application failed. Please try again.</p>}
     </>)
 }
