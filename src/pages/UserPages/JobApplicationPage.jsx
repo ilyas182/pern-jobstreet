@@ -21,7 +21,7 @@ export default function JobApplicationPage() {
     useEffect(()=>{
         getId();
     }, []);
-console.log(id)
+    
     const [inputs, setInputs] = useState({
         experience: "",
         expectedPay: "",
@@ -40,7 +40,7 @@ console.log(id)
 
         try {
 
-            const body = {experience, expectedPay, email, contact, job_id: jobId};
+            const body = {experience, expectedPay, email, contact, job_id: jobId, user_id: id};
             const response = await fetch(`http://localhost:3001/api/main/apply`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -61,7 +61,6 @@ console.log(id)
     }
     return (
     <>
-    <p>test, {id}</p>
      <form onSubmit={submitForm}>
                 <label>Past experiences: </label>
                 <input 
