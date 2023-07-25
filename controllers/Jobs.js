@@ -47,6 +47,7 @@ async function applied(req, res){
 }
 
 async function bookmarked(req, res){
+    console.log(req.body)
     const { user_id } = req.body;
     try {
         const savedJobs = await pool.query("SELECT * FROM savedjobs WHERE user_id = ($1)",

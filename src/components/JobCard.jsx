@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 export default function JobCard({ job }) {
     const navigate = useNavigate();
-    let userId, bookmarkedData;
+    let userId;
+    let bookmarkedData;
     const [bookmark, setBookmark] = useState(null);
     
     async function getId() {
@@ -14,14 +15,23 @@ export default function JobCard({ job }) {
             })
 
             const parseRes = await response.json();
-            userId = parseRes.id;
+            // userId = parseRes.id;
+            return parseRes.id
         } catch (error) {
             console.error(error.message)
         }
     }
-    async function checkIfApplied(){
+    
+    async function checkIfBookmarked(){
+        userId = await getId();
+        const body = { user_id: userId}
+        console.log(body)
         try {
-            const response = await fetch(`http://localhost:3001/api/job/${job.id}/applied`)
+            const response = await fetch("http://localhost:3001/api/job/bookmarked",{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
             const jsonData = await response.json();
             bookmarkedData = jsonData;   
         } catch (error) {
@@ -33,8 +43,8 @@ export default function JobCard({ job }) {
     }
 
     useEffect(()=>{
-        getId();
-        checkIfApplied();
+        // getId();
+        checkIfBookmarked();
     }, []);
     return (
     <>
@@ -42,7 +52,9 @@ export default function JobCard({ job }) {
     <p>Salary: {job.pay}</p> 
     {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
     <button onClick={() => navigate(`/job/${job.id}/apply`)}>Apply</button>
-    <button onClick={handleBookmark}>Bookmark</button>
+    {!bookmark && <button>Bookmark</button>}
+    {bookmark && <button disabled="true">Bookmarked</button>}
+    
     <hr/>
     </>
     )
