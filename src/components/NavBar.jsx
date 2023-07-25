@@ -12,7 +12,7 @@ export default function NavBar(){
             <Navbar.Brand>Your Career Future</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link><Link to="/">Home</Link></Nav.Link>
-              <Nav.Link href="#features">My profile</Nav.Link>
+              <Nav.Link><Link to="/dashboard">Dashboard</Link></Nav.Link>
               <Button variant="outline-success" onClick={() => navigate('/login')}>Login</Button>
               <Button variant="outline-success" onClick={() => navigate('/employer/main')}>For Employers</Button>
             </Nav>

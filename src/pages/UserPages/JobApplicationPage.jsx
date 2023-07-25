@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function JobApplicationPage() {
+    const [user_id, setUser_id] = useState();
+    async function getUserId() {
+        try {
+            const response = await fetch('http://localhost:3001/api/dashboard',{
+                method: "GET",
+                headers: { token: localStorage.token}
+            })
+
+            const parseRes = await response.json();
+            setUser_id(parseRes.id)
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
+    useEffect(()=>{
+     getUserId();
+    }, []);
     const [inputs, setInputs] = useState({
         experience: "",
         expectedPay: "",
         email: "",
         contact: ""});
     const [updateStatus, setUpdateStatus] = useState(null);
+    const {jobId} = useParams(); 
     
     const {experience, expectedPay, email, contact} = inputs;
     const onChange = (e) => {
@@ -18,16 +38,24 @@ export default function JobApplicationPage() {
 
         try {
 
-            const body = {experience, expectedPay, email, contact};
+            const body = {experience, expectedPay, email, contact, job_id: jobId, user_id};
             const response = await fetch(`http://localhost:3001/api/main/apply`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)   
         })
         if (response.ok) {
-            setUpdateStatus("applied!");
+            const responseData = await response.json();
+                const user_id = responseData.user_id;
+
+                // Now you have access to the user_id on the frontend
+                console.log("User ID:", user_id);
+            setUpdateStatus("success");
           } else {
             setUpdateStatus("error");
+            const responseData = await response.json();
+            console.log(responseData)
+        
           }
         } catch (error) {
             console.error(error.message)
