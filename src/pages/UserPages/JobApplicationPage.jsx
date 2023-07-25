@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function JobApplicationPage() {
-    const [user_id, setUser_id] = useState();
-    async function getUserId() {
+    const [id, setId] = useState("");
+
+    async function getId() {
         try {
             const response = await fetch('http://localhost:3001/api/dashboard',{
                 method: "GET",
@@ -11,15 +12,16 @@ export default function JobApplicationPage() {
             })
 
             const parseRes = await response.json();
-            setUser_id(parseRes.id)
+            setId(parseRes.id)
         } catch (error) {
             console.error(error.message)
         }
     }
 
     useEffect(()=>{
-     getUserId();
+        getId();
     }, []);
+console.log(id)
     const [inputs, setInputs] = useState({
         experience: "",
         expectedPay: "",
@@ -38,7 +40,7 @@ export default function JobApplicationPage() {
 
         try {
 
-            const body = {experience, expectedPay, email, contact, job_id: jobId, user_id};
+            const body = {experience, expectedPay, email, contact, job_id: jobId};
             const response = await fetch(`http://localhost:3001/api/main/apply`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -46,10 +48,6 @@ export default function JobApplicationPage() {
         })
         if (response.ok) {
             const responseData = await response.json();
-                const user_id = responseData.user_id;
-
-                // Now you have access to the user_id on the frontend
-                console.log("User ID:", user_id);
             setUpdateStatus("success");
           } else {
             setUpdateStatus("error");
@@ -63,6 +61,7 @@ export default function JobApplicationPage() {
     }
     return (
     <>
+    <p>test, {id}</p>
      <form onSubmit={submitForm}>
                 <label>Past experiences: </label>
                 <input 

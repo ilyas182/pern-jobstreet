@@ -5,7 +5,7 @@ async function authorize(req, res){
         // req.user is holding the payload
         // res.json(req.user);
 
-        const user = await pool.query("SELECT name FROM users WHERE id=$1", [req.user]);
+        const user = await pool.query("SELECT name, id FROM users WHERE id=$1", [req.user]);
         res.json(user.rows[0])
     } catch (error) {
         console.error(error.message);

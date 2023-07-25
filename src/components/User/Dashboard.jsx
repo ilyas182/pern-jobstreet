@@ -21,7 +21,7 @@ export default function Dashboard({setAuth}) {
     useEffect(()=>{
         getName();
     }, []);
-
+    
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem("token");
