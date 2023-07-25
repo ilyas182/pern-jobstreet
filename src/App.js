@@ -11,6 +11,7 @@ import EmployerLogin from './components/Employer/EmployerLogin';
 import EmployerDashboard from './components/Employer/EmployerDashboard';
 import EmployerJobPage from './pages/EmployerPages/EmployerJobPage';
 import EmployerJobDetails from './components/Employer/EmployerJobDetails';
+import JobApplicationPage from './pages/UserPages/JobApplicationPage';
 
 
 
@@ -34,7 +35,10 @@ function App() {
           <Route path="/" element={<MainPage />}/>
           <Route path="/register" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Register setAuth={setAuth}/>)}/>
           <Route path="/login" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Login setAuth={setAuth}/>)}/>
-          <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/> 
+          <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
+          <Route path="/job/:jobId/apply" element={<JobApplicationPage/>}/> 
+
+
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
           <Route path="/employer/login" element={<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
