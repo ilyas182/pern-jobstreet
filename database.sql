@@ -57,6 +57,14 @@ employer_id integer NOT NULL REFERENCES employers (id) ON DELETE CASCADE
 ALTER TABLE jobs
 ADD level varchar;
 
+CREATE TABLE applicants (
+id serial PRIMARY KEY,
+experience text NOT NULL,
+expectedPay varchar,
+job_id integer NOT NULL REFERENCES employers (id) ON DELETE CASCADE
+user_id integer NOT NULL REFERENCES employers (id) ON DELETE CASCADE
+ );
+
 CREATE TABLE jobQn (
 id serial PRIMARY KEY,
 questions varchar NOT NULL,

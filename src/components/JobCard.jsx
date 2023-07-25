@@ -6,6 +6,7 @@ export default function JobCard({ job }) {
     <p>Salary: {job.pay}</p> 
     {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
     <button>Apply</button>
+    <button>Bookmark</button>
     <hr/>
     </>
     )

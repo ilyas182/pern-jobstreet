@@ -68,10 +68,11 @@ async function verify(req, res){
 }
 
 async function apply(req, res){
-    const {job_id, user_id} = req.body;
+    const {job_id, user_id, email, contact, experience, expectedPay} = req.body;
     try {
-        const appliedJob = await pool.query("INSERT INTO jobApplications (job_id, user_id) VALUES ($1, $2)",
-        [job_id, user_id]);
+        const newApplicant = await pool.query("INSERT INTO applicants (experience, expectedPay, email, contact, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6)",
+        [experience, expectedPay, email, contact, job_id, user_id]);
+        console.log(newApplicant.rows[0]);
         res.json({ message: "Job application submitted" });
     } catch (error) {
         console.error(error.message);
