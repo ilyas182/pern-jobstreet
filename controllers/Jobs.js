@@ -35,4 +35,15 @@ async function findById(req,res){
     }
 }
 
-module.exports = { getAll, findByIndustry, findById }
+async function applied(req, res){
+    const { id } = req.params;
+    try {
+        const appliedJobs = await pool.query("SELECT * FROM applicants WHERE job_id = ($1)",
+        [id]);
+        res.json(appliedJobs.rows);
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+module.exports = { getAll, findByIndustry, findById, applied }

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function JobApplicationPage() {
-    const [id, setId] = useState("");
-
+    let userId, applicantData;
+    const navigate = useNavigate();
+    const {jobId} = useParams(); 
+    
     async function getId() {
         try {
             const response = await fetch('http://localhost:3001/api/dashboard',{
@@ -12,14 +14,27 @@ export default function JobApplicationPage() {
             })
 
             const parseRes = await response.json();
-            setId(parseRes.id)
+            userId = parseRes.id;
         } catch (error) {
             console.error(error.message)
         }
     }
-
+    async function checkIfApplied(){
+        try {
+            const response = await fetch(`http://localhost:3001/api/job/${jobId}/applied`)
+            const jsonData = await response.json();
+            applicantData = jsonData;   
+        } catch (error) {
+            console.error(error.message)
+        }
+        if (applicantData[0].job_id == jobId) {
+            setUpdateStatus("success");
+        }
+    }
+    
     useEffect(()=>{
         getId();
+        checkIfApplied();
     }, []);
 
     const [inputs, setInputs] = useState({
@@ -28,7 +43,7 @@ export default function JobApplicationPage() {
         email: "",
         contact: ""});
     const [updateStatus, setUpdateStatus] = useState(null);
-    const {jobId} = useParams(); 
+    
     
     const {experience, expectedPay, email, contact} = inputs;
     const onChange = (e) => {
@@ -40,7 +55,7 @@ export default function JobApplicationPage() {
 
         try {
 
-            const body = {experience, expectedPay, email, contact, job_id: jobId, user_id: id};
+            const body = {experience, expectedPay, email, contact, job_id: jobId, user_id: userId};
             const response = await fetch(`http://localhost:3001/api/main/apply`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -61,6 +76,7 @@ export default function JobApplicationPage() {
     }
     return (
     <>
+    <button onClick={() => navigate(-1)}>Back</button>
      <form onSubmit={submitForm}>
                 <label>Past experiences: </label>
                 <input 
