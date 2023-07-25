@@ -27,7 +27,7 @@ export default function JobApplicationPage() {
         } catch (error) {
             console.error(error.message)
         }
-        if (applicantData[0].job_id == jobId) {
+        if (applicantData[0]?.job_id == jobId) {
             setUpdateStatus("success");
         }
     }
