@@ -65,8 +65,27 @@ export default function JobCard({ job }) {
             
         } catch (error) {
             console.error(error.message)
-        }
-        
+        }   
+    }
+    async function handleUnbookmark(){
+        try {
+            userId = await getId();
+            const body = {user_id : userId, job_id: job.id};
+            console.log(body)
+            const response = await fetch("http://localhost:3001/api/job/unbookmark", {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
+            if (response.ok){
+                const jsonData = await response.json();
+                console.log(jsonData);
+                setBookmark(!bookmark);
+            }
+            
+        } catch (error) {
+            console.error(error.message)
+        }   
     }
     return (
     <>
@@ -75,7 +94,7 @@ export default function JobCard({ job }) {
     {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
     <button onClick={() => navigate(`/job/${job.id}/apply`)}>Apply</button>
     {!bookmark && <button onClick={handleBookmark}>Bookmark</button>}
-    {bookmark && <button>Unbookmark</button>}
+    {bookmark && <button onClick={handleUnbookmark}>Unbookmark</button>}
     
     <hr/>
     </>
