@@ -6,6 +6,7 @@ router.get('/all', jobCntrl.getAll);
 router.get('/industry/:industry', jobCntrl.findByIndustry);
 router.get('/:id', jobCntrl.findById);
 router.get('/:id/applied', jobCntrl.applied);
+router.post('/bookmarked', jobCntrl.bookmarked);
 
 
 module.exports = router;

@@ -46,4 +46,15 @@ async function applied(req, res){
     }
 }
 
-module.exports = { getAll, findByIndustry, findById, applied }
+async function bookmarked(req, res){
+    const { user_id } = req.body;
+    try {
+        const savedJobs = await pool.query("SELECT * FROM savedjobs WHERE user_id = ($1)",
+        [user_id]);
+        res.json(savedJobs.rows);
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+module.exports = { getAll, findByIndustry, findById, applied, bookmarked }
