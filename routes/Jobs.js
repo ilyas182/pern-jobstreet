@@ -7,6 +7,7 @@ router.get('/industry/:industry', jobCntrl.findByIndustry);
 router.get('/:id', jobCntrl.findById);
 router.get('/:id/applied', jobCntrl.applied);
 router.post('/bookmarked', jobCntrl.bookmarked);
+router.delete('/unbookmark', jobCntrl.unbookmark);
 
 
 module.exports = router;

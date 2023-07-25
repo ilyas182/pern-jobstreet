@@ -75,7 +75,7 @@ export default function JobCard({ job }) {
     {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
     <button onClick={() => navigate(`/job/${job.id}/apply`)}>Apply</button>
     {!bookmark && <button onClick={handleBookmark}>Bookmark</button>}
-    {bookmark && <button disabled="true">Bookmarked</button>}
+    {bookmark && <button>Unbookmark</button>}
     
     <hr/>
     </>

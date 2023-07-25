@@ -58,4 +58,13 @@ async function bookmarked(req, res){
     }
 }
 
-module.exports = { getAll, findByIndustry, findById, applied, bookmarked }
+async function unbookmark(req, res){
+    try {
+        const { job_id, user_id } = req.body;
+        const unbookmarked = await pool.query('DELETE FROM savedjobs WHERE job_id = $1 AND user_id = $2', [job_id, user_id]);
+        res.json("Job deleted");
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+module.exports = { getAll, findByIndustry, findById, applied, bookmarked, unbookmark }
