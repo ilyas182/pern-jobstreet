@@ -1,4 +1,10 @@
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom"
+
 export default function SearchBar() {
+    const navigate = useNavigate();
+    const inputRef = useRef();
+        
     return(
     <>
     <form>
@@ -7,9 +13,10 @@ export default function SearchBar() {
             type="search"
             id="mySearch"
             name="q"
+            ref = {inputRef}
             placeholder="Search for job title"
             size="30" />
-            <button>Search</button>
+            <button onClick={()=>navigate('/search', {state: {query: inputRef.current.value}})}>Search</button>
         </div>
     </form>
     </>

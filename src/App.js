@@ -12,6 +12,7 @@ import EmployerDashboard from './components/Employer/EmployerDashboard';
 import EmployerJobPage from './pages/EmployerPages/EmployerJobPage';
 import EmployerJobDetails from './components/Employer/EmployerJobDetails';
 import JobApplicationPage from './pages/UserPages/JobApplicationPage';
+import SearchResultsPage from './pages/UserPages/SearchResultsPage';
 
 
 
@@ -53,7 +54,8 @@ function App() {
           <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>
           <Route path="/login" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
-          <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/> 
+          <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/>
+          <Route path="/search" element={<SearchResultsPage/>}/> 
 
 
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
