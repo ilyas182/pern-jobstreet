@@ -15,6 +15,7 @@ import JobApplicationPage from './pages/UserPages/JobApplicationPage';
 import SearchResultsPage from './pages/UserPages/SearchResultsPage';
 import EmployerNavbar from './components/Employer/EmployerNavbar';
 import EmployerPostJob from './pages/EmployerPages/EmployerPostJobPage';
+import ViewApplicants from './pages/EmployerPages/ViewApplicants';
 
 
 
@@ -77,6 +78,7 @@ function App() {
           <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName/jobs" element={<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName/jobs/:jobId" element={<EmployerJobDetails setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
+          <Route path="/employer/dashboard/:businessName/jobs/:jobId/applicants" element={<ViewApplicants setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/post" element={<EmployerPostJob/>}/>
           {/* <Route path="jobs" element={<EmployerJobPage/>}/> */}
         

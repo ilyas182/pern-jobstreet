@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import EmployerJobDetails from "../../components/Employer/EmployerJobDetails";
+import NoOfApplicants from "../../components/Employer/NoOfApplicants";
 
 export default function EmployerJobPage(){
     const location = useLocation();
@@ -27,6 +28,9 @@ export default function EmployerJobPage(){
     {employerJobs && employerJobs.map((job, i) => (
         <div>
          {i+1}.<Link to={`/employer/dashboard/${employer.businessname}/jobs/${job.id}`} state={{job: job}}>{job.title}</Link>
+         <br/>
+         <NoOfApplicants job={job}/>
+         <hr/>
         </div>
       ))}
     </>
