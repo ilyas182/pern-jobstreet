@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function JobApplicationPage() {
-    let userId, applicantData;
+    let applicantData;
     const navigate = useNavigate();
     const {jobId} = useParams(); 
-    
+    const [userId, setUserId] = useState();
     async function getId() {
         try {
             const response = await fetch('http://localhost:3001/api/dashboard',{
@@ -14,7 +14,7 @@ export default function JobApplicationPage() {
             })
 
             const parseRes = await response.json();
-            userId = parseRes.id;
+            setUserId(parseRes.id);
         } catch (error) {
             console.error(error.message)
         }

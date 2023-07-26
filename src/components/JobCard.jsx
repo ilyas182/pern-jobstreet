@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function JobCard({ job }) {
     const navigate = useNavigate();
-    let userId;
+    const [userId, setUserId] = useState();
     let bookmarkedData;
     const [bookmark, setBookmark] = useState(null);
     
@@ -15,15 +15,14 @@ export default function JobCard({ job }) {
             })
 
             const parseRes = await response.json();
-            // userId = parseRes.id;
-            return parseRes.id
+            setUserId(parseRes.id);
+            
         } catch (error) {
             console.error(error.message)
         }
     }
     
     async function checkIfBookmarked(){
-        userId = await getId();
         const body = { user_id: userId}
         console.log(body)
         try {
@@ -43,13 +42,13 @@ export default function JobCard({ job }) {
     }
 
     useEffect(()=>{
-        // getId();
+        getId();
         checkIfBookmarked();
     }, []);
 
     async function handleBookmark(){
         try {
-            userId = await getId();
+            // userId = await getId();
             if (!userId){
                 navigate('/login');
             }
@@ -72,7 +71,7 @@ export default function JobCard({ job }) {
     }
     async function handleUnbookmark(){
         try {
-            userId = await getId();
+            // userId = await getId();
             const body = {user_id : userId, job_id: job.id};
             // console.log(body)
             const response = await fetch("http://localhost:3001/api/job/unbookmark", {
