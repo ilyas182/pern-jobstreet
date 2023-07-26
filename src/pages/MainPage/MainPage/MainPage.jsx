@@ -13,7 +13,7 @@ export default function MainPage() {
       useEffect(() => {
         fetchAllJobs();
       }, []);
-      console.log("jobs", jobs);
+    //   console.log("jobs", jobs);
     return (
     <Fragment>
         <SearchBar/>

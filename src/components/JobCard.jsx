@@ -54,7 +54,7 @@ export default function JobCard({ job }) {
                 navigate('/login');
             }
             const body = {user_id : userId, job_id: job.id};
-            console.log(body)
+            // console.log(body)
             const response = await fetch("http://localhost:3001/api/main/save", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -62,7 +62,7 @@ export default function JobCard({ job }) {
             })
             if (response.ok){
                 const jsonData = await response.json();
-                console.log(jsonData.message);
+                // console.log(jsonData.message);
                 setBookmark(!bookmark);
             }
             
@@ -74,7 +74,7 @@ export default function JobCard({ job }) {
         try {
             userId = await getId();
             const body = {user_id : userId, job_id: job.id};
-            console.log(body)
+            // console.log(body)
             const response = await fetch("http://localhost:3001/api/job/unbookmark", {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
@@ -82,7 +82,7 @@ export default function JobCard({ job }) {
             })
             if (response.ok){
                 const jsonData = await response.json();
-                console.log(jsonData);
+                // console.log(jsonData);
                 setBookmark(!bookmark);
             }
             

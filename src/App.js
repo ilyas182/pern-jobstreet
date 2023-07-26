@@ -47,7 +47,7 @@ function App() {
   }, [])
   return (
     <Fragment>
-        <NavBar/>
+        <NavBar isAuth={isAuth} setAuth={setAuth}/>
         <Routes>
           <Route path="/" element={<MainPage />}/>
           <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>
