@@ -50,6 +50,9 @@ export default function JobCard({ job }) {
     async function handleBookmark(){
         try {
             userId = await getId();
+            if (!userId){
+                navigate('/login');
+            }
             const body = {user_id : userId, job_id: job.id};
             console.log(body)
             const response = await fetch("http://localhost:3001/api/main/save", {
