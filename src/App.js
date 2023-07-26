@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/User/Dashboard';
 import Login from './components/User/Login';
@@ -13,15 +13,16 @@ import EmployerJobPage from './pages/EmployerPages/EmployerJobPage';
 import EmployerJobDetails from './components/Employer/EmployerJobDetails';
 import JobApplicationPage from './pages/UserPages/JobApplicationPage';
 import SearchResultsPage from './pages/UserPages/SearchResultsPage';
+import EmployerNavbar from './components/Employer/EmployerNavbar';
 
 
 
 function App() {
-
+  const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
   const [employerAuth, setEmployerAuth] = useState(false);
   const navigate = useNavigate();
-  
+  const [employerMode, setEmployerMode] = useState(false)
 
   const setAuth = boolean => {
     setIsAuth(boolean)
@@ -42,13 +43,25 @@ function App() {
       console.error(error.message);
     }
   }
+  const isUserRoute =
+    location.pathname === '/' ||
+    location.pathname === '/register' ||
+    location.pathname === '/login' ||
+    location.pathname === '/dashboard' ||
+    location.pathname.startsWith('/job/') ||
+    location.pathname.startsWith("/search");
+
+  useEffect(() => {
+    console.log("pathname", isUserRoute);
+    setEmployerMode(!isUserRoute);
+  }, [isUserRoute]);
 
   useEffect(() => {
     checkAuth()
   }, [])
   return (
     <Fragment>
-        <NavBar isAuth={isAuth} setAuth={setAuth}/>
+        {!employerMode? (<NavBar isAuth={isAuth} setAuth={setAuth} setEmployerMode={setEmployerMode}/>):(<EmployerNavbar setEmployerMode={setEmployerMode}/>)}
         <Routes>
           <Route path="/" element={<MainPage />}/>
           <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, Button, NavLink } from 'react-bootstrap';
 
-export default function NavBar({isAuth, setAuth}){
+export default function NavBar({isAuth, setAuth, setEmployerMode}){
   const navigate = useNavigate()
   
   const logout = (e) => {
@@ -11,6 +11,11 @@ export default function NavBar({isAuth, setAuth}){
     localStorage.removeItem("token");
     setAuth(false);
     navigate('/')
+  }
+
+  const handleEmployer = () => {
+    setEmployerMode(true);
+    navigate('/employer/main')
   }
     
     return (
@@ -22,7 +27,7 @@ export default function NavBar({isAuth, setAuth}){
               <Nav.Link><Link to="/">Home</Link></Nav.Link>
               {isAuth && (<Nav.Link><Link to="/dashboard">Dashboard</Link></Nav.Link>)}
               {!isAuth ? (<Button variant="outline-success" onClick={() => navigate('/login')}>Login</Button>) : (<Button variant="outline-success" onClick={(e) => logout(e)}>Logout</Button>)}
-              <Button variant="outline-success" onClick={() => navigate('/employer/main')}>For Employers</Button>
+              <Button variant="outline-success" onClick={handleEmployer}>For Employers</Button>
             </Nav>
           </Container>
         </Navbar>

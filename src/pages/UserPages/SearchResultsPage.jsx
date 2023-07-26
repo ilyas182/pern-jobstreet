@@ -32,10 +32,10 @@ export default function SearchResultsPage(){
       }, [query, searchParams]);
     
       // useEffect to log the updated jobs state
-      useEffect(() => {
-        console.log(jobs);
-        console.log('q',searchParams.get('q'))
-      }, [jobs]);
+    //   useEffect(() => {
+    //     console.log(jobs);
+    //     console.log('q',searchParams.get('q'))
+    //   }, [jobs]);
 
     return(
     <>
