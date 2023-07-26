@@ -65,7 +65,7 @@ function App() {
         {!employerMode? (<NavBar isAuth={isAuth} setAuth={setAuth} setEmployerMode={setEmployerMode}/>):(<EmployerNavbar employerAuth={employerAuth} EmployerAuth={EmployerAuth} setEmployerMode={setEmployerMode}/>)}
         <Routes>
           <Route path="/" element={<MainPage />}/>
-          <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>
+          <Route path="/register" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) :(<Register setAuth={setAuth}/>) }/>
           <Route path="/login" element={isAuth ? (<Dashboard setAuth={setAuth}/> ) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/>

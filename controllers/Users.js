@@ -10,7 +10,7 @@ async function create(req,res) {
         // Step 2: check if user exist (if user exist then throw error)
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length !== 0){
-            res.status(401).send("User already exists");
+            return res.status(409).json({error: "User already exists"});
         }
 
         // Step 3: bcrypt user password
