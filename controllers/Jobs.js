@@ -69,9 +69,12 @@ async function unbookmark(req, res){
 }
 
 async function search(req, res){
+    
     try {
-        const { results } = req.params;
+        const  results  = req.query.q;
+        // const searchTerm = `%${results}%`
         const searchTerm = `%${results}%`
+        console.log("query",searchTerm)
         const searchResults = await pool.query("SELECT * FROM jobs WHERE title LIKE $1 OR description LIKE $1", [searchTerm])
         if (searchResults.rows.length === 0) {
             res.json("No search results")
