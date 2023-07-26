@@ -14,5 +14,6 @@ router.get("/:employer_id/jobs", employersCtrl.jobsByEmployer)
 router.get('/getEmployer', employersCtrl.getEmployer);
 router.delete('/deleteJob/:id', employersCtrl.deleteJob)
 router.put('/editJob/:id', employersCtrl.editJob)
+router.get("/authorize", authorization, employersCtrl.authorize);
 
 module.exports = router;

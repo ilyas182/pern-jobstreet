@@ -24,6 +24,7 @@ export default function EmployerNavbar({setEmployerMode, EmployerAuth, employerA
           <Navbar.Brand>Your Career Future</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link>Profile</Nav.Link>
+              {employerAuth && <Nav.Link><Link to="/employer/post">Post Job</Link></Nav.Link>} 
               {!employerAuth ? (<Button variant="outline-success" onClick={()=>navigate('/employer/login')}>Employer Login</Button>) : (<Button variant="outline-success" onClick={(e) => logout(e)}>Logout</Button>)}
               <Button variant="outline-success" onClick={handleCandidate}>For Candidates</Button>
             </Nav>

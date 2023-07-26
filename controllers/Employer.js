@@ -148,4 +148,16 @@ async function postJobQn(req, res) {
     }
   }
 
-module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer, deleteJob, editJob }
+  async function authorize(req, res){
+    try {
+        // req.user is holding the payload
+        // res.json(req.user);
+
+        const employer = await pool.query("SELECT businessname, id FROM employers WHERE id=$1", [req.user]);
+        res.json(employer.rows[0])
+    } catch (error) {
+        console.error(error.message);
+        res.status(403).json("Not authorized");
+    }
+}
+module.exports = { create, login, verify, postJob, postJobQn, jobsByEmployer, getEmployer, deleteJob, editJob, authorize }
