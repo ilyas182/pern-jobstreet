@@ -29,7 +29,7 @@ export default function EmployerJobPage(){
         <div>
          {i+1}.<Link to={`/employer/dashboard/${employer.businessname}/jobs/${job.id}`} state={{job: job}}>{job.title}</Link>
          <br/>
-         <NoOfApplicants job={job}/>
+         <NoOfApplicants employer={employer} job={job}/>
          <hr/>
         </div>
       ))}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function NoOfApplicants({job}){
+export default function NoOfApplicants({job, employer}){
     const [applicants, setApplicants] = useState();
     async function getApplicants(){
         const response = await fetch(`http://localhost:3001/api/job/${job.id}/applied`);
@@ -13,7 +14,9 @@ export default function NoOfApplicants({job}){
     }, [])
     return (
     <>
-    Number of applicants: {applicants.length}
+    
+    Number of applicants: {applicants && applicants.length > 0 ? (<Link to={`/employer/dashboard/${employer.businessname}/jobs/${job.id}/applicants`} > {applicants.length}</Link>):(
+      <>Nil</>)}
     </>
     )
 }
