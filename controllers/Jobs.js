@@ -67,4 +67,19 @@ async function unbookmark(req, res){
         console.error(error.message);
     }
 }
-module.exports = { getAll, findByIndustry, findById, applied, bookmarked, unbookmark }
+
+async function search(req, res){
+    try {
+        const { results } = req.params;
+        const searchTerm = `%${results}%`
+        const searchResults = await pool.query("SELECT * FROM jobs WHERE title LIKE $1 OR description LIKE $1", [searchTerm])
+        if (searchResults.rows.length === 0) {
+            res.json("No search results")
+        } else res.json(searchResults.rows);
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+module.exports = { getAll, findByIndustry, findById, applied, bookmarked, unbookmark, search }

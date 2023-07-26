@@ -8,6 +8,7 @@ router.get('/:id', jobCntrl.findById);
 router.get('/:id/applied', jobCntrl.applied);
 router.post('/bookmarked', jobCntrl.bookmarked);
 router.delete('/unbookmark', jobCntrl.unbookmark);
+router.get('/search/:results', jobCntrl.search);
 
 
 module.exports = router;
