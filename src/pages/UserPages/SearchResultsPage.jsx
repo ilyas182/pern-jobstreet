@@ -4,8 +4,8 @@ import JobCard from "../../components/JobCard";
 
 export default function SearchResultsPage(){
     const location = useLocation();
-    const query = location?.state?.query;
-    console.log('query', query)
+    let query = location?.state?.query;
+    // console.log('query', query)
     const [searchParams, setSearchParams] = useSearchParams(); 
     const [jobs, setJobs] = useState([]);
     
@@ -23,15 +23,18 @@ export default function SearchResultsPage(){
         if (query) {
           const search = { q: query };
           setSearchParams(search, { replace: true });
-        //   query = searchParams.get('q')
-          searchResult();
+        //   
+          
+        } else {
+            query = searchParams.get('q')
         }
+        searchResult();
       }, [query, searchParams]);
     
       // useEffect to log the updated jobs state
       useEffect(() => {
         console.log(jobs);
-        // console.log(searchParams.get('q'))
+        console.log('q',searchParams.get('q'))
       }, [jobs]);
 
     return(
