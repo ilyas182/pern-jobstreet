@@ -27,6 +27,7 @@ export default function EmployerJobDetails(){
     const {title, description, pay, industry, location, level} = inputs;
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name]:e.target.value})
+        setUpdateStatus(false)
     };
   
     const submitForm = async (e) => {
@@ -107,7 +108,12 @@ export default function EmployerJobDetails(){
                     className="form-control my-3"
                     value = {level}
                     onChange={e => onChange(e)}/>
-                <button className="btn btn-success btn-block">Update</button>
+                
+                {updateStatus !== "success" && (<button className="btn btn-success btn-block">Update</button>)}
+                {updateStatus == "success" && (
+                <button className="btn btn-success btn-block" disabled="true">
+                    Job posting updated!
+                </button>)}
             </form>
         
         <button onClick={() => handleDelete(job.id)}>Delete job</button>
