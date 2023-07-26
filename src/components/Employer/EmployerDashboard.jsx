@@ -1,20 +1,19 @@
 import { Fragment } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import EmployerNavbar from "./EmployerNavbar";
+import EmployerJobPage from "../../pages/EmployerPages/EmployerJobPage";
 
 export default function EmployerDashboard({setAuth, EmployerAuth}) {
     const location = useLocation();
     const employer = location?.state?.employer;   
     const navigate = useNavigate();
-    const handleLogout = () => {
-        setAuth(false);
-        EmployerAuth(false);
-        navigate('/employer/main');
-    }
+    EmployerAuth(true);
     return (
         <Fragment>
-            <EmployerNavbar employer={employer}/>
-            <button onClick={handleLogout}>Logout</button>
+            <h1>Weclome, {employer.businessname}</h1>
+            <hr/>
+            <Link to={`/employer/dashboard/${employer.businessname}/jobs`} state={{employer: employer}}>Posted Jobs</Link>
+            {/* <EmployerJobPage employer={employer}/> */}
         </Fragment>
     )
 }

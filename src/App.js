@@ -61,7 +61,7 @@ function App() {
   }, [])
   return (
     <Fragment>
-        {!employerMode? (<NavBar isAuth={isAuth} setAuth={setAuth} setEmployerMode={setEmployerMode}/>):(<EmployerNavbar setEmployerMode={setEmployerMode}/>)}
+        {!employerMode? (<NavBar isAuth={isAuth} setAuth={setAuth} setEmployerMode={setEmployerMode}/>):(<EmployerNavbar employerAuth={employerAuth} EmployerAuth={EmployerAuth} setEmployerMode={setEmployerMode}/>)}
         <Routes>
           <Route path="/" element={<MainPage />}/>
           <Route path="/register" element={isAuth ? (<Register setAuth={setAuth}/>) : (<Dashboard setAuth={setAuth}/> ) }/>
@@ -71,7 +71,7 @@ function App() {
           <Route path="/search" element={<SearchResultsPage/>}/> 
 
 
-          <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>} />
+          <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} setEmployerAuth={setEmployerAuth}/>} />
           <Route path="/employer/login" element={<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
           <Route path="/employer/dashboard/:businessName/jobs" element={<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
