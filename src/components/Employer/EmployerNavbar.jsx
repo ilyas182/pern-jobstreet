@@ -20,6 +20,7 @@ export default function EmployerNavbar({employer, setEmployerMode}){
               {/* <Nav.Link>
                 <Link to={`/employer/dashboard/${employer.businessname}/jobs`} state={{employer: employer}}>Jobs Posted</Link></Nav.Link> */}
               <Nav.Link>Profile</Nav.Link>
+              <Button variant="outline-success" onClick={()=>navigate('/employer/login')}>Employer Login</Button>
               <Button variant="outline-success" onClick={handleCandidate}>For Candidates</Button>
             </Nav>
           </Container>
