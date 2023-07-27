@@ -14,7 +14,7 @@ export default function Bookmarks({job_id}){
     },[])
     return (
     <>
-    {job.length > 0 ? (job.map((job) => <JobCard job={job}/>)):(<>No bookmarked jobs</>)}
+    {job.length && job.map((job) => <JobCard job={job}/>)}
     </>
     )
 }

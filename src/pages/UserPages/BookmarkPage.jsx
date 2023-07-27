@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Bookmarks from "../../components/User/Bookmark";
+import Spinner from 'react-bootstrap/Spinner'
 
 export default function BookmarkPage(){
     const [userId, setUserId] = useState("");
     const [bookmarked, setBookmarked] = useState([])
+    const [loading, setLoading] = useState(false);
     async function getId() {
         try {
             const response = await fetch('http://localhost:3001/api/dashboard',{
@@ -28,7 +30,7 @@ export default function BookmarkPage(){
             })
             const jsonData = await response.json();
             setBookmarked(jsonData);
-            
+            setLoading(true);
         } catch (error) {
             console.error(error.message)
         }
@@ -39,10 +41,13 @@ export default function BookmarkPage(){
     }, []);
     useEffect(()=>{
         checkIfBookmarked();
+        console.log(bookmarked)
     }, [userId]);
     return(
     <>
-    {bookmarked && bookmarked.map((job, i) => <Bookmarks job_id={job.job_id} i={i} /> )}
+    {!loading &&  <Spinner animation="border" variant="primary" />}
+    {bookmarked && bookmarked.length > 0 ? bookmarked.map((job, i) => <Bookmarks job_id={job.job_id} i={i} /> ) : (<>No bookmarked jobs</>)}
+    
     </>
     )
 }
