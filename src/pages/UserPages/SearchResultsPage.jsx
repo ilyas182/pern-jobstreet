@@ -39,8 +39,9 @@ export default function SearchResultsPage(){
 
     return(
     <>
-    <p>Results</p>
-    {jobs.map((job) => <JobCard key={job.id} job={job} />)}
+    <h1>Search Results</h1>
+    
+    {jobs && jobs.length > 0 ? (jobs.map((job) => <JobCard key={job.id} job={job} />)) : (jobs.Results)}
     </>
     )
 }

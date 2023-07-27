@@ -77,7 +77,7 @@ async function search(req, res){
         console.log("query",searchTerm)
         const searchResults = await pool.query("SELECT * FROM jobs WHERE title LIKE $1 OR description LIKE $1", [searchTerm])
         if (searchResults.rows.length === 0) {
-            res.json("No search results")
+            res.json({Results: "No search results"})
         } else res.json(searchResults.rows);
         
     } catch (error) {
