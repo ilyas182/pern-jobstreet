@@ -53,6 +53,7 @@ export default function Dashboard({setAuth}) {
     return (
         <Fragment>
             <h1>Welcome, {name}</h1>
+            <h3>Applications: </h3>
             {/* {JSON.stringify(applied)} */}
             {applied.length ? (applied.map((job, i) => <AppliedJobs job_id={job.job_id} i={i}/>)): (<>No applications sent</>)}
             

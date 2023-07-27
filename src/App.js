@@ -16,6 +16,7 @@ import SearchResultsPage from './pages/UserPages/SearchResultsPage';
 import EmployerNavbar from './components/Employer/EmployerNavbar';
 import EmployerPostJob from './pages/EmployerPages/EmployerPostJobPage';
 import ViewApplicants from './pages/EmployerPages/ViewApplicants';
+import BookmarkPage from './pages/UserPages/BookmarkPage';
 
 
 
@@ -50,6 +51,7 @@ function App() {
     location.pathname === '/register' ||
     location.pathname === '/login' ||
     location.pathname === '/dashboard' ||
+    location.pathname === '/bookmarks'
     location.pathname.startsWith('/job/') ||
     location.pathname.startsWith("/search");
 
@@ -71,6 +73,7 @@ function App() {
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/search" element={<SearchResultsPage/>}/> 
+          <Route path="/bookmarks" element={<BookmarkPage/>}/>
 
 
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} setEmployerAuth={setEmployerAuth}/>} />

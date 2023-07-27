@@ -28,6 +28,7 @@ export default function NavBar({isAuth, setAuth, setEmployerMode}){
             <Nav className="me-auto">
               <Nav.Link><Link to="/">Home</Link></Nav.Link>       
               {isAuth && (<Nav.Link><Link to="/dashboard">Dashboard</Link></Nav.Link>)}
+              {isAuth && (<Nav.Link><Link to="/bookmarks">Bookmarks</Link></Nav.Link>)}
               {!isAuth ? (<Button variant="outline-success" onClick={() => navigate('/login')}>Login</Button>) : (<Button variant="outline-danger" onClick={(e) => logout(e)}>Logout</Button>)}
             </Nav>
             <Nav pullRight>
