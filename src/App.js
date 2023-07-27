@@ -74,12 +74,12 @@ function App() {
 
 
           <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} setEmployerAuth={setEmployerAuth}/>} />
-          <Route path="/employer/login" element={<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/dashboard/:businessName" element={<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/dashboard/:businessName/jobs" element={<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/dashboard/:businessName/jobs/:jobId" element={<EmployerJobDetails setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/dashboard/:businessName/jobs/:jobId/applicants" element={<ViewApplicants setAuth={setAuth} EmployerAuth={EmployerAuth}/>}/>
-          <Route path="/employer/post" element={<EmployerPostJob/>}/>
+          <Route path="/employer/login" element={!employerAuth ? (<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>) : (<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
+          <Route path="/employer/dashboard/:businessName" element={employerAuth ? (<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>) :(<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
+          <Route path="/employer/dashboard/:businessName/jobs" element={employerAuth ? (<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>) :(<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
+          <Route path="/employer/dashboard/:businessName/jobs/:jobId" element={employerAuth ? (<EmployerJobDetails setAuth={setAuth} EmployerAuth={EmployerAuth}/>) : (<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
+          <Route path="/employer/dashboard/:businessName/jobs/:jobId/applicants" element={employerAuth ? (<ViewApplicants setAuth={setAuth} EmployerAuth={EmployerAuth}/>):(<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
+          <Route path="/employer/post" element={employerAuth ? (<EmployerPostJob setAuth={setAuth} EmployerAuth={EmployerAuth}/>) : (<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
           {/* <Route path="jobs" element={<EmployerJobPage/>}/> */}
         
         </Routes>

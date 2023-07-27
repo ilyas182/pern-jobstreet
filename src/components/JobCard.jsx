@@ -6,6 +6,7 @@ export default function JobCard({ job }) {
     const [userId, setUserId] = useState();
     let bookmarkedData;
     const [bookmark, setBookmark] = useState(null);
+    const [jobDetails, setJobDetails] = useState();
     
     async function getId() {
         try {
@@ -21,7 +22,11 @@ export default function JobCard({ job }) {
             console.error(error.message)
         }
     }
-    
+    async function getJobDetails() {
+        const response = await fetch(`http://localhost:3001/api/job/${job.id}`);
+        const jsonData = await response.json();
+        setJobDetails(jsonData);
+    }
     async function checkIfBookmarked(){
         const body = { user_id: userId}
         console.log(body)
@@ -44,6 +49,7 @@ export default function JobCard({ job }) {
     useEffect(()=>{
         getId();
         checkIfBookmarked();
+        getJobDetails();
     }, []);
 
     async function handleBookmark(){
@@ -92,12 +98,13 @@ export default function JobCard({ job }) {
     return (
     <>
     <h2>{job.title}</h2>
-    <p>Salary: {job.pay}</p> 
+    <p>Salary: {job.pay}</p>
+    <p>Description: {job.description}</p> 
+    <p>Location: {job.location}</p>
     {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
     <button onClick={() => navigate(`/job/${job.id}/apply`)}>Apply</button>
     {!bookmark && <button onClick={handleBookmark}>Bookmark</button>}
     {bookmark && <button onClick={handleUnbookmark}>Unbookmark</button>}
-    
     <hr/>
     </>
     )
