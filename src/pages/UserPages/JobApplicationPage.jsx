@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function JobApplicationPage() {
-    let applicantData;
     const navigate = useNavigate();
     const {jobId} = useParams(); 
-    const [userId, setUserId] = useState();
+    const [userId, setUserId] = useState("");
+    const [applied, setApplied] = useState([])
     async function getId() {
         try {
             const response = await fetch('http://localhost:3001/api/dashboard',{
@@ -20,22 +20,34 @@ export default function JobApplicationPage() {
         }
     }
     async function checkIfApplied(){
+        const body = {user_id: userId}
         try {
-            const response = await fetch(`http://localhost:3001/api/job/${jobId}/applied`)
+            const response = await fetch(`http://localhost:3001/api/main/applied`,{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
             const jsonData = await response.json();
-            applicantData = jsonData;   
+            setApplied(jsonData)
         } catch (error) {
             console.error(error.message)
         }
-        if (applicantData[0]?.job_id == jobId) {
-            setUpdateStatus("success");
-        }
+       
     }
     
     useEffect(()=>{
         getId();
-        checkIfApplied();
-    }, []);
+        checkIfApplied()
+    }, [userId]);
+    useEffect(() => {
+        console.log('applied', applied)
+        console.log(jobId)
+        applied.map((job, i) => console.log(i, job.job_id))
+        if (applied.some(job => job.job_id == jobId)) {
+            setUpdateStatus("success");
+        }
+        console.log('status', updateStatus)
+    }, [applied]);
 
     const [inputs, setInputs] = useState({
         experience: "",
