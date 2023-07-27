@@ -34,14 +34,36 @@ function App() {
     setEmployerAuth(boolean)
   }
 
-  async function checkAuth() {
+  async function checkUserAuth() {
     try {
       const response = await fetch('http://localhost:3001/api/main/verify',{
         method: "GET",
         headers: {token: localStorage.token}
       })
       const parseResponse = await response.json();
-      parseResponse === true ? setIsAuth(true) : setIsAuth(false);
+      if (parseResponse === true) {
+        setIsAuth(true);
+        EmployerAuth(false);
+      } else {
+        setIsAuth(false);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  async function checkEmployerAuth() {
+    try {
+      const response = await fetch('http://localhost:3001/api/employer/verify',{
+        method: "GET",
+        headers: {token: localStorage.token}
+      })
+      const parseResponse = await response.json();
+      if (parseResponse === true) {
+        EmployerAuth(true);
+        setIsAuth(false);
+      } else {
+        EmployerAuth(false);
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -61,7 +83,8 @@ function App() {
   }, [isUserRoute]);
 
   useEffect(() => {
-    checkAuth()
+    checkUserAuth()
+    checkEmployerAuth()
   }, [])
   return (
     <Fragment>
