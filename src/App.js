@@ -73,10 +73,10 @@ function App() {
           <Route path="/dashboard" element={isAuth ? (<Dashboard setAuth={setAuth}/>) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/job/:jobId/apply" element={isAuth ? (<JobApplicationPage/>) : (<Login setAuth={setAuth}/>)}/>
           <Route path="/search" element={<SearchResultsPage/>}/> 
-          <Route path="/bookmarks" element={<BookmarkPage/>}/>
+          <Route path="/bookmarks" element={isAuth ? (<BookmarkPage/>) : ((<Login setAuth={setAuth}/>))}/>
 
 
-          <Route path="/employer/main" element={<EmployerMainPage setAuth={setAuth} setEmployerAuth={setEmployerAuth}/>} />
+          <Route path="/employer/main" element={!employerAuth ? (<EmployerMainPage setAuth={setAuth} setEmployerAuth={setEmployerAuth}/>) : (<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>)} />
           <Route path="/employer/login" element={!employerAuth ? (<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>) : (<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
           <Route path="/employer/dashboard/:businessName" element={employerAuth ? (<EmployerDashboard setAuth={setAuth} EmployerAuth={EmployerAuth}/>) :(<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>
           <Route path="/employer/dashboard/:businessName/jobs" element={employerAuth ? (<EmployerJobPage setAuth={setAuth} EmployerAuth={EmployerAuth}/>) :(<EmployerLogin setAuth={setAuth} EmployerAuth={EmployerAuth}/>)}/>

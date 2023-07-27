@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 export default function ViewApplicants(){
     const {jobId} = useParams();
     const [applicants, setApplicants] = useState();
+    const navigate = useNavigate();
     
     async function getApplicants(){
         const response = await fetch(`http://localhost:3001/api/job/${jobId}/applied`);
@@ -17,6 +18,7 @@ export default function ViewApplicants(){
     return (
     <>
     <h1>Applicants</h1>
+    <button onClick={()=> navigate(-1)}>Back</button>
     {applicants && applicants.map((applicant, i) =>
     <div> 
     <h3>Applicant {i+1}</h3>
