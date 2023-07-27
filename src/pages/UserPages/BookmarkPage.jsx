@@ -35,9 +35,11 @@ export default function BookmarkPage(){
     }
     useEffect(()=>{
         getId();
-        checkIfBookmarked();
-        console.log('bookmark',bookmarked);   
+        // checkIfBookmarked();
     }, []);
+    useEffect(()=>{
+        checkIfBookmarked();
+    }, [userId]);
     return(
     <>
     {bookmarked && bookmarked.map((job, i) => <Bookmarks job_id={job.job_id} i={i} /> )}

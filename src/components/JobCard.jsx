@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 export default function JobCard({ job }) {
     const navigate = useNavigate();
     const [userId, setUserId] = useState();
-    let bookmarkedData;
+    const [bookmarkedData, setBookmarkedData] = useState([]);
     const [bookmark, setBookmark] = useState(null);
     const [employer, setEmployer] = useState();
     
@@ -40,12 +40,10 @@ export default function JobCard({ job }) {
                 body: JSON.stringify(body)
             })
             const jsonData = await response.json();
-            bookmarkedData = jsonData;   
+            setBookmarkedData(jsonData);
+            // setBookmark(bookmarkedData.some((job) => job.job_id == job.id));   
         } catch (error) {
             console.error(error.message)
-        }
-        if (bookmarkedData[0]?.job_id == job.id) {
-            setBookmark(true);
         }
     }
 
@@ -53,8 +51,17 @@ export default function JobCard({ job }) {
         getId();
         checkIfBookmarked();
         getEmployer();
-    }, []);
-
+    }, [userId]);
+    
+    useEffect(() => {
+        console.log("bookmarkedData",bookmarkedData)
+        bookmarkedData.map((job, i) => console.log(i, job.job_id))
+        if (bookmarkedData.some(bookmark => bookmark.job_id == job.id)) {
+            setBookmark(true)
+        }
+        console.log('bookmark', bookmark)
+    }, [bookmarkedData]);
+   
     async function handleBookmark(){
         try {
             // userId = await getId();
