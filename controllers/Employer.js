@@ -164,7 +164,7 @@ async function getEmployerbyId(req,res){
     const { employer_id } = req.params; 
     try {
         const employer = await pool.query("SELECT * FROM employers WHERE id = ($1)", [employer_id])
-        res.json(employer.rows)
+        res.json(employer.rows[0])
     } catch (error) {
         console.error(error.message)
     }
