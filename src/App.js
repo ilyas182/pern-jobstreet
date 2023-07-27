@@ -51,7 +51,7 @@ function App() {
     location.pathname === '/register' ||
     location.pathname === '/login' ||
     location.pathname === '/dashboard' ||
-    location.pathname === '/bookmarks'
+    location.pathname === '/bookmarks' ||
     location.pathname.startsWith('/job/') ||
     location.pathname.startsWith("/search");
 
