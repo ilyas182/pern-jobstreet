@@ -75,7 +75,7 @@ async function search(req, res){
         // const searchTerm = `%${results}%`
         const searchTerm = `%${results}%`
         console.log("query",searchTerm)
-        const searchResults = await pool.query("SELECT * FROM jobs WHERE title LIKE $1 OR description ILIKE $1", [searchTerm])
+        const searchResults = await pool.query("SELECT * FROM jobs WHERE title ILIKE $1 OR description ILIKE $1", [searchTerm])
         if (searchResults.rows.length === 0) {
             res.json({Results: "No search results"})
         } else res.json(searchResults.rows);
