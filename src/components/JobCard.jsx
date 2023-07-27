@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function JobCard({ job }) {
     const navigate = useNavigate();
@@ -98,16 +100,21 @@ export default function JobCard({ job }) {
     }
     return (
     <>
-    <h2>{job.title}</h2>
-    <p>Company: {employer?.businessname}</p>
-    <p>Salary: {job.pay}</p>
-    <p>Description: {job.description}</p> 
-    <p>Location: {job.location}</p>
-    {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
-    <button onClick={() => navigate(`/job/${job.id}/apply`)}>Apply</button>
-    {!bookmark && <button onClick={handleBookmark}>Bookmark</button>}
-    {bookmark && <button onClick={handleUnbookmark}>Unbookmark</button>}
+    <Card style={{ width: '24rem' }} className="text-center">
+      <Card.Body>
+        <Card.Title>{job.title}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">Company: {employer?.businessname}</Card.Subtitle>
+        <Card.Text>Description: {job.description}</Card.Text>
+        <Card.Text>Salary: {job.pay}</Card.Text>
+        <Card.Text>Location: {job.location}</Card.Text>
+        {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
+        <Button onClick={() => navigate(`/job/${job.id}/apply`)} variant="success">Apply</Button>
+        {!bookmark && <Button variant="warning" onClick={handleBookmark}>Bookmark</Button>}
+        {bookmark && <Button variant="warning" onClick={handleUnbookmark}>Unbookmark</Button>}
+      </Card.Body>
+    </Card>
     <hr/>
+    
     </>
     )
 }
