@@ -32,7 +32,7 @@ export default function JobCard({ job }) {
 
     async function checkIfBookmarked(){
         const body = { user_id: userId}
-        console.log(body)
+        // console.log(body)
         try {
             const response = await fetch("http://localhost:3001/api/job/bookmarked",{
                 method: "POST",

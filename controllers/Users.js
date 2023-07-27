@@ -90,6 +90,14 @@ async function save(req, res){
         res.status(500).send("Server Error")
     }
 }
+async function appliedJobs(req,res){
+    const {user_id} = req.body;
+    try {
+        const jobs = await pool.query("SELECT * from applicants WHERE user_id = ($1)", [user_id])
+        res.json(jobs.rows)
+    } catch (error) {
+        console.error(error.message)
+    }
+}
 
-
-module.exports = { create, login, verify, apply, save };
+module.exports = { create, login, verify, apply, save, appliedJobs };

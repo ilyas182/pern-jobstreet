@@ -1,13 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 export default function SearchBar() {
     const navigate = useNavigate();
     const inputRef = useRef();
+    const [show, setShow] = useState(false)
     
     const handleSearch = () => {
         const inputValue = inputRef.current.value.trim(); // Remove leading and trailing spaces

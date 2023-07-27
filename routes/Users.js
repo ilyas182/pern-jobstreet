@@ -9,5 +9,6 @@ router.post('/login', validInfo, usersCtrl.login);
 router.get("/verify", authorization, usersCtrl.verify);
 router.post('/apply', usersCtrl.apply);
 router.post('/save', usersCtrl.save);
+router.post('/applied', usersCtrl.appliedJobs);
 
 module.exports = router;

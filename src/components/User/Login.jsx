@@ -53,7 +53,7 @@ export default function Login({setAuth}) {
                 onChange={(e)=>onChange(e)}
             />
             <button className="btn btn-success btn-block" onSubmit={handleSubmit}>Submit</button>
-            <p>Don't have an account? Click </p><Link to="/register">here</Link> <p>to register</p>
+            <p>Don't have an account? Click <><Link to="/register">here</Link> </>to register</p>
         </form>
     </Fragment>
         

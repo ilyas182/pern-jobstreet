@@ -1,8 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
+import { json } from "react-router-dom";
+import AppliedJobs from "./AppliedJobs";
 
 export default function Dashboard({setAuth}) {
 
     const [name, setName] = useState("");
+    const [id, setId] = useState("");
+    const [applied, setApplied] = useState([]);
 
     async function getName() {
         try {
@@ -13,6 +17,23 @@ export default function Dashboard({setAuth}) {
 
             const parseRes = await response.json();
             setName(parseRes.name)
+            setId(parseRes.id);
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
+    async function getJobId(){
+        const body = { user_id: id}
+        try {
+            const response = await fetch("http://localhost:3001/api/main/applied",{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            });
+            const jsonData = await response.json();
+            setApplied(jsonData);
+
         } catch (error) {
             console.error(error.message)
         }
@@ -20,7 +41,9 @@ export default function Dashboard({setAuth}) {
 
     useEffect(()=>{
         getName();
-    }, []);
+        getJobId();
+        
+    }, [id]);
     
     const logout = (e) => {
         e.preventDefault();
@@ -29,8 +52,10 @@ export default function Dashboard({setAuth}) {
     }
     return (
         <Fragment>
-            Dashboard, {name}
-            <button onClick={(e) => logout(e)}>Logout</button>
+            <h1>Welcome, {name}</h1>
+            {/* {JSON.stringify(applied)} */}
+            {applied.length ? (applied.map((job, i) => <AppliedJobs job_id={job.job_id} i={i}/>)): (<>No applications sent</>)}
+            
         </Fragment>
     )
 }
