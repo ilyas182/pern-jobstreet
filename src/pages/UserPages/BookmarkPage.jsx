@@ -8,7 +8,7 @@ export default function BookmarkPage(){
     const [loading, setLoading] = useState(false);
     async function getId() {
         try {
-            const response = await fetch('http://localhost:3001/api/dashboard',{
+            const response = await fetch('/api/dashboard',{
                 method: "GET",
                 headers: { token: localStorage.token}
             })
@@ -23,7 +23,7 @@ export default function BookmarkPage(){
     async function checkIfBookmarked(){
         const body = { user_id: userId}
         try {
-            const response = await fetch("http://localhost:3001/api/job/bookmarked",{
+            const response = await fetch("/api/job/bookmarked",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

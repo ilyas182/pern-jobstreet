@@ -12,7 +12,7 @@ export default function JobCard({ job }) {
     
     async function getId() {
         try {
-            const response = await fetch('http://localhost:3001/api/dashboard',{
+            const response = await fetch('/api/dashboard',{
                 method: "GET",
                 headers: { token: localStorage.token}
             })
@@ -25,7 +25,7 @@ export default function JobCard({ job }) {
         }
     }
     async function getEmployer() {
-        const response = await fetch(`http://localhost:3001/api/employer/${job.employer_id}`);
+        const response = await fetch(`/api/employer/${job.employer_id}`);
         const jsonData = await response.json();
         setEmployer(jsonData);
     }
@@ -34,7 +34,7 @@ export default function JobCard({ job }) {
         const body = { user_id: userId}
         // console.log(body)
         try {
-            const response = await fetch("http://localhost:3001/api/job/bookmarked",{
+            const response = await fetch("/api/job/bookmarked",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -71,7 +71,7 @@ export default function JobCard({ job }) {
             }
             const body = {user_id : userId, job_id: job.id};
             // console.log(body)
-            const response = await fetch("http://localhost:3001/api/main/save", {
+            const response = await fetch("/api/main/save", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -91,7 +91,7 @@ export default function JobCard({ job }) {
             // userId = await getId();
             const body = {user_id : userId, job_id: job.id};
             // console.log(body)
-            const response = await fetch("http://localhost:3001/api/job/unbookmark", {
+            const response = await fetch("/api/job/unbookmark", {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

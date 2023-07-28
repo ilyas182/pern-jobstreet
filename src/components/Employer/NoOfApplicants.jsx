@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function NoOfApplicants({job, employer}){
     const [applicants, setApplicants] = useState();
     async function getApplicants(){
-        const response = await fetch(`http://localhost:3001/api/job/${job.id}/applied`);
+        const response = await fetch(`/api/job/${job.id}/applied`);
         const jsonData = await response.json();
         setApplicants(jsonData)
     }

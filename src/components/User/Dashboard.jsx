@@ -10,7 +10,7 @@ export default function Dashboard({setAuth}) {
 
     async function getName() {
         try {
-            const response = await fetch('http://localhost:3001/api/dashboard',{
+            const response = await fetch('/api/dashboard',{
                 method: "GET",
                 headers: { token: localStorage.token}
             })
@@ -26,7 +26,7 @@ export default function Dashboard({setAuth}) {
     async function getJobId(){
         const body = { user_id: id}
         try {
-            const response = await fetch("http://localhost:3001/api/main/applied",{
+            const response = await fetch("/api/main/applied",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)

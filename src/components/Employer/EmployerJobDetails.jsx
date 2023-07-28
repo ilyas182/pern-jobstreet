@@ -10,7 +10,7 @@ export default function EmployerJobDetails(){
 
     const handleDelete = async(id) => {
         try {
-          const response = await fetch(`http://localhost:3001/api/employer/deleteJob/${id}`,{
+          const response = await fetch(`/api/employer/deleteJob/${id}`,{
             method: 'DELETE'
           });
           console.log(response);
@@ -36,7 +36,7 @@ export default function EmployerJobDetails(){
         try {
 
             const body = {title, description, pay, industry, location, level};
-            const response = await fetch(`http://localhost:3001/api/employer/editJob/${job.id}`, { 
+            const response = await fetch(`/api/employer/editJob/${job.id}`, { 
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)   

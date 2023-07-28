@@ -12,7 +12,7 @@ export default function SearchResultsPage(){
     
 
     async function searchResult(){
-        const response = await fetch(`http://localhost:3001/api/job/search?q=${query}`, {
+        const response = await fetch(`/api/job/search?q=${query}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"}
         });

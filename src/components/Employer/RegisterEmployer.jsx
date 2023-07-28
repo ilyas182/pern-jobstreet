@@ -21,7 +21,7 @@ export default function RegisterEmployer({setAuth, EmployerAuth}){
         try {
 
             const body = {email, contact_name, contact, businessName, password};
-            const response = await fetch("http://localhost:3001/api/employer/register", { 
+            const response = await fetch("/api/employer/register", { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)

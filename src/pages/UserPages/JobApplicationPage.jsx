@@ -8,7 +8,7 @@ export default function JobApplicationPage() {
     const [applied, setApplied] = useState([])
     async function getId() {
         try {
-            const response = await fetch('http://localhost:3001/api/dashboard',{
+            const response = await fetch('/api/dashboard',{
                 method: "GET",
                 headers: { token: localStorage.token}
             })
@@ -22,7 +22,7 @@ export default function JobApplicationPage() {
     async function checkIfApplied(){
         const body = {user_id: userId}
         try {
-            const response = await fetch(`http://localhost:3001/api/main/applied`,{
+            const response = await fetch(`/api/main/applied`,{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -68,7 +68,7 @@ export default function JobApplicationPage() {
         try {
 
             const body = {experience, expectedPay, email, contact, job_id: jobId, user_id: userId};
-            const response = await fetch(`http://localhost:3001/api/main/apply`, { 
+            const response = await fetch(`/api/main/apply`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)   

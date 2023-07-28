@@ -7,7 +7,7 @@ export default function ViewApplicants(){
     const navigate = useNavigate();
     
     async function getApplicants(){
-        const response = await fetch(`http://localhost:3001/api/job/${jobId}/applied`);
+        const response = await fetch(`/api/job/${jobId}/applied`);
         const jsonData = await response.json();
         setApplicants(jsonData)
     }

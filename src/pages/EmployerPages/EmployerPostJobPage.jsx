@@ -8,7 +8,7 @@ export default function EmployerPostJob(){
 
     async function getEmployer() {
         try {
-            const response = await fetch('http://localhost:3001/api/employer/authorize',{
+            const response = await fetch('/api/employer/authorize',{
                 method: "GET",
                 headers: { token: localStorage.token}
             })
@@ -38,7 +38,7 @@ export default function EmployerPostJob(){
         try {
 
             const body = {title, description, pay, industry, location, level, employer_id: employer.id};
-            const response = await fetch(`http://localhost:3001/api/employer/postjob`, { 
+            const response = await fetch(`/api/employer/postjob`, { 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)   

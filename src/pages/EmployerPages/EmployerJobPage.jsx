@@ -12,7 +12,7 @@ export default function EmployerJobPage(){
     
     useEffect(() => {
         async function fetchEmployerJobs() {
-            const response = await fetch(`http://localhost:3001/api/employer/${employer.id}/jobs`);
+            const response = await fetch(`/api/employer/${employer.id}/jobs`);
             const jsonData = await response.json();
             setEmployerJobs(jsonData);
             

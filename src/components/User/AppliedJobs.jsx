@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function AppliedJobs({job_id, i}){
     const [job, setJob] = useState("");
     async function getJob(){
-        const response = await fetch(`http://localhost:3001/api/job/${job_id}`)
+        const response = await fetch(`/api/job/${job_id}`)
         const jsonData = await response.json();
         setJob(jsonData);
     }
