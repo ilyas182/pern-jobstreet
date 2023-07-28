@@ -54,6 +54,7 @@ export default function JobCard({ job }) {
     }, [userId]);
     
     useEffect(() => {
+        // checkIfBookmarked();
         console.log("bookmarkedData",bookmarkedData)
         bookmarkedData.map((job, i) => console.log(i, job.job_id))
         if (bookmarkedData.some(bookmark => bookmark.job_id == job.id)) {

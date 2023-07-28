@@ -8,7 +8,7 @@ export default function MainPage() {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(false);
     async function fetchAllJobs() {
-        const response = await fetch(`http://localhost:3001/api/job/all`);
+        const response = await fetch(`/api/job/all`);
         const jsonData = await response.json();
         setJobs(jsonData);
         setLoading(true);
