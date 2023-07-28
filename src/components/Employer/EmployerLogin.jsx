@@ -31,17 +31,19 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
             // localStorage.setItem("token", parseResponse.token);
             console.log(parseResponse)
             if (response.ok) {
+                if (!parseResponse.message){
                 localStorage.setItem("token", parseResponse.token);
                 EmployerAuth(true);
-                console.log(response)  
-                if (parseResponse.employer && parseResponse.employer.businessname) {
+                console.log(response)
+                // if (!parseResponse.message) {
                     navigate(
                         `/employer/dashboard/${parseResponse.employer.businessname}`,
                         { state: { employer: parseResponse.employer } }
-                    );}
-                // navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
-                // { state: { employer: parseResponse.employer }});
-              } else {
+                    );
+                } else {
+                    setError("Email or password is incorrect");
+                }
+            } else {
                 EmployerAuth(false);
                 setError("Email or password is incorrect");
               }

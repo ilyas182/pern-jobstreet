@@ -16,7 +16,7 @@ module.exports = function(req, res, next) {
       if (![email, password].every(Boolean)) {
         return res.json("Missing Credentials");
       } else if (!validEmail(email)) {
-        return res.json("Invalid Email");
+        return res.json({message: "Invalid Email"});
       }
     }
   

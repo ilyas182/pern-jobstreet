@@ -26,8 +26,12 @@ export default function Login({setAuth}) {
                 const parseResponse = await response.json();
                 // localStorage.setItem("token", parseResponse.token);
                 if (response.ok) {
+                    if (!parseResponse.message) {
                     localStorage.setItem("token", parseResponse.token);
                     setAuth(true);
+                    } else {
+                        setError("Email or password is incorrect");
+                    }
                   } else {
                     setError("Email or password is incorrect");
                   }
