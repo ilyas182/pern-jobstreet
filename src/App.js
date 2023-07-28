@@ -43,7 +43,7 @@ function App() {
       const parseResponse = await response.json();
       if (parseResponse === true) {
         setIsAuth(true);
-        EmployerAuth(false);
+        // EmployerAuth(false);
       } else {
         setIsAuth(false);
       }
@@ -60,7 +60,7 @@ function App() {
       const parseResponse = await response.json();
       if (parseResponse === true) {
         EmployerAuth(true);
-        setIsAuth(false);
+        // setIsAuth(false);
       } else {
         EmployerAuth(false);
       }
