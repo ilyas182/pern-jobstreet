@@ -29,12 +29,18 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
 
             const parseResponse = await response.json();
             // localStorage.setItem("token", parseResponse.token);
+            console.log(parseResponse)
             if (response.ok) {
                 localStorage.setItem("token", parseResponse.token);
                 EmployerAuth(true);
                 console.log(response)  
-                navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
-                { state: { employer: parseResponse.employer }});
+                if (parseResponse.employer && parseResponse.employer.businessname) {
+                    navigate(
+                        `/employer/dashboard/${parseResponse.employer.businessname}`,
+                        { state: { employer: parseResponse.employer } }
+                    );}
+                // navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
+                // { state: { employer: parseResponse.employer }});
               } else {
                 EmployerAuth(false);
                 setError("Email or password is incorrect");
