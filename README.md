@@ -41,3 +41,7 @@ The project is built using the following technologies and frameworks:
 - PostgreSQL
 - React Router
 - Bootstrap
+
+## Deployment
+
+Deployed on cyclic @ URL: https://yourcareerfuture.cyclic.app/
