@@ -7,6 +7,7 @@ export default function Login({setAuth}) {
         email: "",
         password: ""
     });
+    const [error, setError] = useState("");
     
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name]: e.target.value})
@@ -23,8 +24,13 @@ export default function Login({setAuth}) {
                 body: JSON.stringify(body)
             })
                 const parseResponse = await response.json();
-                localStorage.setItem("token", parseResponse.token);
-                setAuth(true);
+                // localStorage.setItem("token", parseResponse.token);
+                if (response.ok) {
+                    localStorage.setItem("token", parseResponse.token);
+                    setAuth(true);
+                  } else {
+                    setError("Email or password is incorrect");
+                  }
                 
         } catch (error) {
             console.error(error.message);
@@ -36,6 +42,7 @@ export default function Login({setAuth}) {
     <Fragment>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
+        {error && <p>{error}</p>}
             <input 
                 type="email" 
                 placeholder="email"

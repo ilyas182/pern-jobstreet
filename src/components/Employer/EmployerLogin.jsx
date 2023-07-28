@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function EmployerLogin({setAuth, EmployerAuth}){
 
-
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: "",
@@ -28,12 +28,18 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
         })
 
             const parseResponse = await response.json();
-            localStorage.setItem("token", parseResponse.token);
-            EmployerAuth(true);
-            setAuth(false);
-            navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
-            { state: { employer: parseResponse.employer } }
-            );
+            // localStorage.setItem("token", parseResponse.token);
+            if (response.ok) {
+                localStorage.setItem("token", parseResponse.token);
+                EmployerAuth(true);
+                console.log(response)  
+                navigate(`/employer/dashboard/${parseResponse.employer.businessname}`,
+                { state: { employer: parseResponse.employer }});
+              } else {
+                EmployerAuth(false);
+                setError("Email or password is incorrect");
+              }
+            
             // console.log(parseResponse.employer)
         } catch (error) {
             console.error(error.message)
@@ -43,6 +49,7 @@ export default function EmployerLogin({setAuth, EmployerAuth}){
     <>
     <h1>Employer Login</h1>
     <form onSubmit={submitForm}>
+    {error && <p>{error}</p>}
                 <input 
                     type='email' 
                     placeholder='Email Login ID' 

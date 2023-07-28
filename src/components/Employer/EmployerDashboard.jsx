@@ -10,9 +10,9 @@ export default function EmployerDashboard({setAuth, EmployerAuth}) {
     EmployerAuth(true);
     return (
         <Fragment>
-            <h1>Weclome, {employer.businessname}</h1>
+            <h1>Weclome, {employer?.businessname}</h1>
             <hr/>
-            <Link to={`/employer/dashboard/${employer.businessname}/jobs`} state={{employer: employer}}>Posted Jobs</Link>
+            <Link to={`/employer/dashboard/${employer?.businessname}/jobs`} state={{employer: employer}}>Posted Jobs</Link>
             {/* <EmployerJobPage employer={employer}/> */}
         </Fragment>
     )

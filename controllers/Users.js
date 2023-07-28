@@ -38,15 +38,15 @@ async function login(req,res){
         // 2. check if user doesnt exist
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if (user.rows[0].length === 0)
+        if (user.rows.length === 0)
         {
-            res.status(401).json("Email or password is incorrect");
+            return res.status(401).json({message: "Email or password is incorrect"});
         }
         // 3. check if incoming password is same as database pwd
         const validPassword = await bcrypt.compare(password, user.rows[0].password);
         console.log(validPassword);
         if (!validPassword) {
-            return res.status(401).json("Email or password is incorrect");
+            return res.status(401).json({message: "Email or password is incorrect"});
         }
 
         // 4. jwt token
