@@ -5,6 +5,9 @@ import Card from 'react-bootstrap/Card';
 import * as mdb from 'mdb-ui-kit';
 import "mdb-ui-kit/css/mdb.min.css"; 
 import { BsBookmarks, BsBookmarksFill } from "react-icons/bs";
+import { CiLocationOn } from "react-icons/ci";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { LuNetwork } from "react-icons/lu";
 
 export default function JobCard({ job }) {
     const navigate = useNavigate();
@@ -111,20 +114,23 @@ export default function JobCard({ job }) {
     }
     return (
     <>
-    <Card style={{ width: '24rem' }} className="text-center">
+    <div className="d-flex justify-content-center my-1">
+    <Card style={{ width: '40rem' }} className="border border-primary">
       <Card.Body>
         <Card.Title>{job.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Company: {employer?.businessname}</Card.Subtitle>
         <Card.Text>Description: {job.description}</Card.Text>
-        <Card.Text>Salary: {job.pay}</Card.Text>
-        <Card.Text>Location: {job.location}</Card.Text>
-        {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
+        <Card.Text><FaRegMoneyBillAlt/> Salary: {job.pay}</Card.Text>
+        <Card.Text><CiLocationOn/>Location: {job.location}</Card.Text>
+        {job.level ? (<p><LuNetwork/> Experience: {job.level}</p>) : (<p><LuNetwork/> Experience: Not specified</p>)}
+        <div className="text-center">
         <Button onClick={() => navigate(`/job/${job.id}/apply`)} variant="success">Apply</Button>
         {!bookmark && <Button variant="warning" onClick={handleBookmark}><BsBookmarks/> Bookmark</Button>}
         {bookmark && <Button variant="warning" onClick={handleUnbookmark}><BsBookmarksFill/> Unbookmark</Button>}
+        </div>
       </Card.Body>
     </Card>
-    <hr/>
+    </div>
     
     </>
     )

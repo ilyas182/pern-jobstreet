@@ -21,10 +21,13 @@ export default function MainPage() {
     return (
     <Fragment>
         <SearchBar/>
-        <hr></hr>
+        <br/>
+        <div className="d-flex flex-column">
+        <div className="d-flex justify-content-center lead">We have {jobs.length} jobs available
         {!loading &&  <Spinner animation="border" variant="primary" />}
+        </div>
         {jobs.map((job) => <JobCard job={job} />)}
-        
+        </div>
     </Fragment>
     )
 }

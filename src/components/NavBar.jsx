@@ -24,7 +24,7 @@ export default function NavBar({isAuth, setAuth, setEmployerMode}){
         <>  
         <Navbar bg="light" data-bs-theme="light">
           <Container>
-            <Navbar.Brand>Your Career Future</Navbar.Brand>
+            <Navbar.Brand><strong><span className="text-success">Your</span><span className="text-primary">Careers</span><span className="text-success">Future</span></strong></Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link><Link to="/">Home</Link></Nav.Link>       
               {isAuth && (<Nav.Link><Link to="/dashboard">Dashboard</Link></Nav.Link>)}
