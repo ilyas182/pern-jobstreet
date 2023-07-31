@@ -2,8 +2,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, Button, NavLink } from 'react-bootstrap';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { BiLogIn,BiLogOut } from "react-icons/bi";
+import { MdWorkOutline } from "react-icons/md";
 
 export default function NavBar({isAuth, setAuth, setEmployerMode}){
   const navigate = useNavigate()
@@ -29,10 +29,10 @@ export default function NavBar({isAuth, setAuth, setEmployerMode}){
               <Nav.Link><Link to="/">Home</Link></Nav.Link>       
               {isAuth && (<Nav.Link><Link to="/dashboard">Dashboard</Link></Nav.Link>)}
               {isAuth && (<Nav.Link><Link to="/bookmarks">Bookmarks</Link></Nav.Link>)}
-              {!isAuth ? (<Button variant="outline-success" onClick={() => navigate('/login')}>Login</Button>) : (<Button variant="outline-danger" onClick={(e) => logout(e)}>Logout</Button>)}
+              {!isAuth ? (<Button variant="outline-success" onClick={() => navigate('/login')}><BiLogIn/> Login</Button>) : (<Button variant="outline-danger" onClick={(e) => logout(e)}><BiLogOut/> Logout</Button>)}
             </Nav>
             <Nav pullRight>
-              <Button variant="primary" onClick={handleEmployer}>For Employers</Button>
+              <Button variant="primary" onClick={handleEmployer}>For Employers <MdWorkOutline/></Button>
             </Nav>
           </Container>
         </Navbar>

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import * as mdb from 'mdb-ui-kit';
+import "mdb-ui-kit/css/mdb.min.css"; 
+import { BsBookmarks, BsBookmarksFill } from "react-icons/bs";
 
 export default function JobCard({ job }) {
     const navigate = useNavigate();
@@ -117,8 +120,8 @@ export default function JobCard({ job }) {
         <Card.Text>Location: {job.location}</Card.Text>
         {job.level ? (<p>Experience: {job.level}</p>) : (<p>Experience: Not specified</p>)}
         <Button onClick={() => navigate(`/job/${job.id}/apply`)} variant="success">Apply</Button>
-        {!bookmark && <Button variant="warning" onClick={handleBookmark}>Bookmark</Button>}
-        {bookmark && <Button variant="warning" onClick={handleUnbookmark}>Unbookmark</Button>}
+        {!bookmark && <Button variant="warning" onClick={handleBookmark}><BsBookmarks/> Bookmark</Button>}
+        {bookmark && <Button variant="warning" onClick={handleUnbookmark}><BsBookmarksFill/> Unbookmark</Button>}
       </Card.Body>
     </Card>
     <hr/>
